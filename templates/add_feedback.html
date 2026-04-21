@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Feedback - HandiCare</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1><span class="highlight">Handi</span>Care</h1>
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="user_dashboard.html">Dashboard</a></li>
+                <li><a href="feedback.html" class="active">Feedback</a></li>
+                <li><a href="emergency.html">Emergency</a></li>
+                <li><a href="login.html" class="logout-btn">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="feedback-form">
+            <div class="container">
+                <div class="form-header">
+                    <h2>Add New Feedback</h2>
+                    <p>Share your experience with our volunteers</p>
+                </div>
+
+                <form id="feedbackForm" class="form-container">
+                    <div class="form-group">
+                        <label for="volunteer">Select Volunteer:</label>
+                        <select id="volunteer" name="volunteer_id" required>
+                            <option value="">Choose a volunteer...</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="rating">Rating:</label>
+                        <div class="rating-input">
+                            <i class="fas fa-star" data-rating="1"></i>
+                            <i class="fas fa-star" data-rating="2"></i>
+                            <i class="fas fa-star" data-rating="3"></i>
+                            <i class="fas fa-star" data-rating="4"></i>
+                            <i class="fas fa-star" data-rating="5"></i>
+                        </div>
+                        <input type="hidden" id="rating" name="rating" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="comment">Your Feedback:</label>
+                        <textarea id="comment" name="comment" rows="4" required placeholder="Share your experience..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="is_public">
+                            <input type="checkbox" id="is_public" name="is_public">
+                            Make this feedback public
+                        </label>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Submit Feedback</button>
+                        <a href="user_dashboard.html" class="btn btn-secondary">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load volunteers for the select dropdown
+            fetch('/api/volunteers')
+                .then(response => response.json())
+                .then(data => {
+                    const select = document.getElementById('volunteer');
+                    data.volunteers.forEach(volunteer => {
+                        const option = document.createElement('option');
+                        option.value = volunteer.id;
+                        option.textContent = volunteer.name;
+                        select.appendChild(option);
+                    });
+                });
+
+            // Handle star rating
+            const stars = document.querySelectorAll('.rating-input i');
+            const ratingInput = document.getElementById('rating');
+            
+            stars.forEach(star => {
+                star.addEventListener('mouseover', function() {
+                    const rating = this.dataset.rating;
+                    updateStars(rating);
+                });
+
+                star.addEventListener('click', function() {
+                    const rating = this.dataset.rating;
+                    ratingInput.value = rating;
+                    updateStars(rating);
+                });
+            });
+
+            document.querySelector('.rating-input').addEventListener('mouseleave', function() {
+                updateStars(ratingInput.value || 0);
+            });
+
+            function updateStars(rating) {
+                stars.forEach(star => {
+                    const starRating = star.dataset.rating;
+                    star.classList.toggle('active', starRating <= rating);
+                });
+            }
+
+            // Handle form submission
+            document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const formData = {
+                    volunteer_id: document.getElementById('volunteer').value,
+                    rating: document.getElementById('rating').value,
+                    comment: document.getElementById('comment').value,
+                    is_public: document.getElementById('is_public').checked
+                };
+
+                fetch('/api/feedback', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Feedback submitted successfully!');
+                        window.location.href = 'user_dashboard.html';
+                    } else {
+                        alert('Error submitting feedback: ' + data.error);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error submitting feedback. Please try again.');
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

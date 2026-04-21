@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Request & Feedback - HandiCare</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .tab-container {
+            margin: 20px 0;
+        }
+        .tab-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .tab-button {
+            padding: 10px 20px;
+            border: none;
+            background: #f0f0f0;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .tab-button.active {
+            background: #007bff;
+            color: white;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .rating-input i {
+            cursor: pointer;
+            font-size: 24px;
+            color: #ddd;
+            transition: color 0.2s;
+        }
+        .rating-input i.active {
+            color: #ffd700;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .form-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1><span class="highlight">Handi</span>Care</h1>
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/user_dashboard">Dashboard</a></li>
+                <li><a href="/feedback">Feedback</a></li>
+                <li><a href="/emergency">Emergency</a></li>
+                <li><a href="/logout" class="logout-btn">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="container">
+            <div class="tab-container">
+                <div class="tab-buttons">
+                    <button class="tab-button active" data-tab="new-request">New Request</button>
+                    <button class="tab-button" data-tab="add-feedback">Add Feedback</button>
+                </div>
+
+                <!-- New Request Form -->
+                <div class="tab-content active" id="new-request">
+                    <div class="form-container">
+                        <h2>New Help Request</h2>
+                        <form id="new-request-form">
+                            <div class="form-group">
+                                <label for="request-title">Title</label>
+                                <input type="text" id="request-title" name="title" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="request-type">Type of Help</label>
+                                <select id="request-type" name="type" required>
+                                    <option value="">Select type of help</option>
+                                    <option value="shopping">Grocery Shopping</option>
+                                    <option value="medical">Medical Appointment</option>
+                                    <option value="housework">Housework</option>
+                                    <option value="transportation">Transportation</option>
+                                    <option value="companionship">Companionship</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="request-date">Date</label>
+                                <input type="date" id="request-date" name="date" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="request-time">Time</label>
+                                <input type="time" id="request-time" name="time" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="request-duration">Duration (hours)</label>
+                                <input type="number" id="request-duration" name="duration" min="1" max="8" value="1" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="request-location">Location</label>
+                                <input type="text" id="request-location" name="location" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="request-description">Description</label>
+                                <textarea id="request-description" name="description" rows="4" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" id="request-urgent" name="urgent">
+                                    This is urgent
+                                </label>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">Submit Request</button>
+                                <a href="user_dashboard.html" class="btn btn-secondary">Cancel</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Add Feedback Form -->
+                <div class="tab-content" id="add-feedback">
+                    <div class="form-container">
+                        <h2>Add Feedback</h2>
+                        <form id="feedback-form">
+                            <div class="form-group">
+                                <label for="volunteer">Select Volunteer:</label>
+                                <select id="volunteer" name="volunteer_id" required>
+                                    <option value="">Choose a volunteer...</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="rating">Rating:</label>
+                                <div class="rating-input">
+                                    <i class="fas fa-star" data-rating="1"></i>
+                                    <i class="fas fa-star" data-rating="2"></i>
+                                    <i class="fas fa-star" data-rating="3"></i>
+                                    <i class="fas fa-star" data-rating="4"></i>
+                                    <i class="fas fa-star" data-rating="5"></i>
+                                </div>
+                                <input type="hidden" id="rating" name="rating" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="comment">Your Feedback:</label>
+                                <textarea id="comment" name="comment" rows="4" required placeholder="Share your experience..."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" id="is_public" name="is_public">
+                                    Make this feedback public
+                                </label>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">Submit Feedback</button>
+                                <a href="user_dashboard.html" class="btn btn-secondary">Cancel</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check for hash in URL to switch tabs
+            const hash = window.location.hash;
+            if (hash === '#add-feedback') {
+                document.querySelector('[data-tab="add-feedback"]').click();
+            }
+
+            // Tab switching functionality
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const tabId = button.dataset.tab;
+                    
+                    // Update active states
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    
+                    button.classList.add('active');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+
+            // Load volunteers for feedback form
+            fetch('/api/volunteers')
+                .then(response => response.json())
+                .then(data => {
+                    const select = document.getElementById('volunteer');
+                    data.volunteers.forEach(volunteer => {
+                        const option = document.createElement('option');
+                        option.value = volunteer.id;
+                        option.textContent = volunteer.name;
+                        select.appendChild(option);
+                    });
+                });
+
+            // Star rating functionality
+            const stars = document.querySelectorAll('.rating-input i');
+            const ratingInput = document.getElementById('rating');
+            
+            stars.forEach(star => {
+                star.addEventListener('mouseover', function() {
+                    const rating = this.dataset.rating;
+                    updateStars(rating);
+                });
+
+                star.addEventListener('click', function() {
+                    const rating = this.dataset.rating;
+                    ratingInput.value = rating;
+                    updateStars(rating);
+                });
+            });
+
+            document.querySelector('.rating-input').addEventListener('mouseleave', function() {
+                updateStars(ratingInput.value || 0);
+            });
+
+            function updateStars(rating) {
+                stars.forEach(star => {
+                    const starRating = star.dataset.rating;
+                    star.classList.toggle('active', starRating <= rating);
+                });
+            }
+
+            // Handle new request form submission
+            document.getElementById('new-request-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const formData = {
+                    title: document.getElementById('request-title').value,
+                    type: document.getElementById('request-type').value,
+                    date: document.getElementById('request-date').value,
+                    time: document.getElementById('request-time').value,
+                    duration: document.getElementById('request-duration').value,
+                    location: document.getElementById('request-location').value,
+                    description: document.getElementById('request-description').value,
+                    is_urgent: document.getElementById('request-urgent').checked
+                };
+
+                fetch('/api/help_requests', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Request submitted successfully!');
+                        window.location.href = '/user_dashboard';
+                    } else {
+                        alert('Error submitting request: ' + data.error);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error submitting request. Please try again.');
+                });
+            });
+
+            // Handle feedback form submission
+            document.getElementById('feedback-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const formData = {
+                    volunteer_id: document.getElementById('volunteer').value,
+                    rating: document.getElementById('rating').value,
+                    comment: document.getElementById('comment').value,
+                    is_public: document.getElementById('is_public').checked
+                };
+
+                fetch('/api/feedback', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Feedback submitted successfully!');
+                        window.location.href = 'user_dashboard.html';
+                    } else {
+                        alert('Error submitting feedback: ' + data.error);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error submitting feedback. Please try again.');
+                });
+            });
+        });
+    </script>
+    <script src="../static/js/user_dashboard.js"></script>
+</body>
+</html> 

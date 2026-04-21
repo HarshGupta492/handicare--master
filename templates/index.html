@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HandiCare - Helpdesk for Handicapped People</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Enhanced Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(33, 150, 243, 0.1) 0%, rgba(33, 150, 243, 0.2) 100%);
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            padding: 20px;
+            flex: 1 1 350px;
+        }
+
+        .hero-image-innovative {
+            position: absolute;
+            right: 40px;
+            bottom: 0;
+            max-width: 400px;
+            background: #e3f2fd;
+            border-radius: 24px;
+            padding: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 20px 40px rgba(33, 150, 243, 0.12);
+        }
+
+        .hero-image-innovative img {
+            width: 100%;
+            height: auto;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(33, 150, 243, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        /* Enhanced Features Section */
+        .features {
+            padding: 80px 0;
+            background: #ffffff;
+        }
+
+        .feature-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 20px;
+        }
+
+        .feature-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(33, 150, 243, 0.15);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #e3f2fd;
+            border-radius: 50%;
+            padding: 15px;
+        }
+
+        .feature-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* Enhanced Testimonials Section */
+        .testimonials {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+        }
+
+        .testimonial-content {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 30px rgba(33, 150, 243, 0.1);
+        }
+
+        .author-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid #2196f3;
+            margin: 0 auto 15px;
+        }
+
+        .author-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .testimonial-content p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin: 2rem 0;
+            position: relative;
+            z-index: 1;
+            color: #222;
+            text-shadow: none;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 40px 0;
+            }
+
+            .feature-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .testimonial-content {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .hero .container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .hero-image-innovative {
+                position: static;
+                margin: 32px auto 0 auto;
+                right: unset;
+                bottom: unset;
+                max-width: 90vw;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1><span class="highlight">Handi</span>Care</h1>
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="/" class="active">Home</a></li>
+                <li><a href="/login">Login</a></li>
+                <li><a href="/register">Register</a></li>
+                <li><a href="/feedback">Feedback</a></li>
+                <li><a href="/emergency">Emergency</a></li>
+            </ul>
+        </nav>
+        <div class="hamburger">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+    </header>
+
+    <main>
+        <div id="success-message" style="display:none;background:#e3fbe3;color:#256029;padding:16px 24px;border-radius:8px;margin:24px auto 0 auto;max-width:600px;text-align:center;font-size:1.1rem;font-weight:500;"></div>
+        <section class="hero">
+            <div class="container" style="position:relative;min-height:400px;">
+                <div class="hero-content">
+                    <h1>Welcome to HandiCare</h1>
+                    <p>Connecting those in need with those who can help</p>
+                    <div class="cta-buttons">
+                        <a href="/register?type=user" class="btn btn-primary">Get Help</a>
+                        <a href="/register?type=volunteer" class="btn btn-secondary">Volunteer Now</a>
+                    </div>
+                </div>
+                <div class="hero-image-innovative">
+                    <img src="/static/images/hero-illustration.jpeg" alt="Illustration of people helping each other" />
+                </div>
+            </div>
+        </section>
+
+        <section class="mission">
+            <div class="container">
+                <h2>Our Mission</h2>
+                <p>HandiCare is dedicated to providing accessible support services for people with disabilities. We connect individuals in need with volunteers who can offer assistance, creating a community of care and support.</p>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="container">
+                <h2>How We Help</h2>
+                <div class="feature-cards">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <img src="/static/images/feature-assistance.png" alt="Immediate Assistance">
+                        </div>
+                        <h3>Immediate Assistance</h3>
+                        <p>Request help for daily tasks and receive assistance from our verified volunteers.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <img src="/static/images/feature-volunteer.png" alt="Volunteer Network">
+                        </div>
+                        <h3>Volunteer Network</h3>
+                        <p>Join our community of volunteers and make a difference in someone's life.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <img src="/static/images/feature-emergency.png" alt="Emergency Support">
+                        </div>
+                        <h3>Emergency Support</h3>
+                        <p>Quick access to emergency contacts and immediate help when you need it most.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="testimonials">
+            <div class="container">
+                <h2>What People Say</h2>
+                <div class="testimonial-slider">
+                    <div class="testimonial-track">
+                        <div class="testimonial-slide active">
+                            <div class="testimonial-content">
+                                <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                                <p>"HandiCare has been a lifesaver for me. I can now get help with grocery shopping and doctor visits without feeling like a burden to my family."</p>
+                                <div class="testimonial-author">
+                                    <div class="author-image">
+                                        <img src="/static/images/user1.jpg" alt="Sarah J." onerror="this.onerror=null; this.src='/static/images/default-avatar.png';">
+                                    </div>
+                                    <div class="author-info">
+                                        <h4>Sarah J.</h4>
+                                        <p>User</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-slide">
+                            <div class="testimonial-content">
+                                <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                                <p>"Volunteering with HandiCare has been one of the most rewarding experiences of my life. I've met amazing people and made real connections."</p>
+                                <div class="testimonial-author">
+                                    <div class="author-image">
+                                        <img src="/static/images/user2.jpg" alt="Michael T." onerror="this.onerror=null; this.src='/static/images/default-avatar.png';">
+                                    </div>
+                                    <div class="author-info">
+                                        <h4>Michael T.</h4>
+                                        <p>Volunteer</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-slide">
+                            <div class="testimonial-content">
+                                <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                                <p>"The platform is so easy to use, even for someone like me who isn't tech-savvy. The volunteers are kind and professional."</p>
+                                <div class="testimonial-author">
+                                    <div class="author-image">
+                                        <img src="/static/images/user3.jpg" alt="Robert K." onerror="this.onerror=null; this.src='/static/images/default-avatar.png';">
+                                    </div>
+                                    <div class="author-info">
+                                        <h4>Robert K.</h4>
+                                        <p>User</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slider-controls">
+                        <button class="prev-btn" aria-label="Previous testimonial">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <div class="slider-dots">
+                            <button class="dot active" aria-label="First testimonial"></button>
+                            <button class="dot" aria-label="Second testimonial"></button>
+                            <button class="dot" aria-label="Third testimonial"></button>
+                        </div>
+                        <button class="next-btn" aria-label="Next testimonial">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>HandiCare</h3>
+                    <p>Connecting those in need with those who can help.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/login">Login</a></li>
+                        <li><a href="/register">Register</a></li>
+                        <li><a href="/feedback">Feedback</a></li>
+                        <li><a href="/emergency">Emergency</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-envelope"></i> info@handicare.org</p>
+                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Follow Us</h3>
+                    <div class="social-icons">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 HandiCare. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/static/js/main.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Show success message if present in URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const successMsg = urlParams.get('success_msg');
+        if (successMsg) {
+            const successDiv = document.getElementById('success-message');
+            successDiv.textContent = successMsg;
+            successDiv.style.display = 'block';
+        }
+        const slides = document.querySelectorAll('.testimonial-slide');
+        const dots = document.querySelectorAll('.dot');
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
+        let currentSlide = 0;
+        let slideInterval;
+
+        function showSlide(index) {
+            // Hide all slides
+            slides.forEach(slide => {
+                slide.classList.remove('active');
+                slide.style.transform = 'translateX(100%)';
+                slide.style.visibility = 'hidden';
+            });
+            
+            // Update dots
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            // Show current slide
+            slides[index].classList.add('active');
+            slides[index].style.transform = 'translateX(0)';
+            slides[index].style.visibility = 'visible';
+            dots[index].classList.add('active');
+            
+            currentSlide = index;
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        // Add click event listeners
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => {
+                prevSlide();
+                resetInterval();
+            });
+        }
+
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                nextSlide();
+                resetInterval();
+            });
+        }
+
+        // Add click event listeners to dots
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                showSlide(index);
+                resetInterval();
+            });
+        });
+
+        function startAutoSlide() {
+            slideInterval = setInterval(nextSlide, 5000);
+        }
+
+        function resetInterval() {
+            clearInterval(slideInterval);
+            startAutoSlide();
+        }
+
+        const slider = document.querySelector('.testimonial-slider');
+        if (slider) {
+            slider.addEventListener('mouseenter', () => clearInterval(slideInterval));
+            slider.addEventListener('mouseleave', startAutoSlide);
+        }
+
+        // Initialize the slideshow
+        showSlide(0);
+        startAutoSlide();
+    });
+    </script>
+</body>
+</html>

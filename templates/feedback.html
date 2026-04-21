@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback - HandiCare</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .feedback-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: calc(100vh - 200px);
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+        }
+
+        .feedback-content {
+            display: flex;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(33, 150, 243, 0.1);
+            overflow: hidden;
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        .feedback-image {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f5f9ff;
+        }
+
+        .feedback-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+        }
+
+        .feedback-form {
+            flex: 1;
+            padding: 40px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #37474f;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: #2196f3;
+            outline: none;
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .rating-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .rating-option {
+            flex: 1;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .rating-option:hover {
+            border-color: #2196f3;
+            background: #e3f2fd;
+        }
+
+        .rating-option.selected {
+            border-color: #2196f3;
+            background: #e3f2fd;
+        }
+
+        .rating-option i {
+            font-size: 24px;
+            margin-bottom: 8px;
+            color: #2196f3;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background: #2196f3;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background: #1976d2;
+        }
+
+        @media (max-width: 768px) {
+            .feedback-content {
+                flex-direction: column;
+            }
+
+            .feedback-image {
+                padding: 20px;
+            }
+
+            .feedback-form {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1><span class="highlight">Handi</span>Care</h1>                                                                                                                               
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/login">Login</a></li>
+                <li><a href="/register">Register</a></li>
+                <li><a href="/feedback">Feedback</a></li>
+                <li><a href="/emergency">Emergency</a></li>
+            </ul>
+        </nav>
+        <div class="hamburger">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+    </header>
+
+    <main>
+        <div class="feedback-container">
+            <div class="feedback-content">
+                <div class="feedback-image">
+                    <img src="/static/images/feedback-illustration.png" alt="Feedback Illustration">
+                </div>
+                <div class="feedback-form">
+                    <h2>Share Your Feedback</h2>
+                    <p>Help us improve our services</p>
+
+                    <form action="/feedback" method="POST">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>How would you rate your experience?</label>
+                            <div class="rating-group">
+                                <div class="rating-option" data-rating="1">
+                                    <i class="fas fa-frown"></i>
+                                    <p>Poor</p>
+                                </div>
+                                <div class="rating-option" data-rating="2">
+                                    <i class="fas fa-meh"></i>
+                                    <p>Fair</p>
+                                </div>
+                                <div class="rating-option" data-rating="3">
+                                    <i class="fas fa-smile"></i>
+                                    <p>Good</p>
+                                </div>
+                                <div class="rating-option" data-rating="4">
+                                    <i class="fas fa-laugh"></i>
+                                    <p>Excellent</p>
+                                </div>
+                            </div>
+                            <input type="hidden" id="rating" name="rating" value="3">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="feedback">Your Feedback</label>
+                            <textarea id="feedback" name="feedback" required></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-btn">Submit Feedback</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>HandiCare</h3>
+                    <p>Connecting those in need with those who can help.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/login">Login</a></li>
+                        <li><a href="/register">Register</a></li>
+                        <li><a href="/feedback">Feedback</a></li>
+                        <li><a href="/emergency">Emergency</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-envelope"></i> info@handicare.org</p>
+                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Follow Us</h3>
+                    <div class="social-icons">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 HandiCare. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const ratingOptions = document.querySelectorAll('.rating-option');
+            const ratingInput = document.getElementById('rating');
+
+            ratingOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    // Remove selected class from all options
+                    ratingOptions.forEach(opt => opt.classList.remove('selected'));
+                    
+                    // Add selected class to clicked option
+                    this.classList.add('selected');
+                    
+                    // Update hidden input value
+                    ratingInput.value = this.dataset.rating;
+                });
+            });
+
+            // Set initial selection
+            ratingOptions[2].classList.add('selected');
+        });
+    </script>
+</body>
+</html>

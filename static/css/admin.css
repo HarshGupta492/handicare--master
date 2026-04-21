@@ -1,0 +1,237 @@
+/* Admin Panel Specific Styles */
+
+/* Admin Dashboard */
+.admin-dashboard {
+    padding: 2rem 0;
+  }
+  
+  /* Activity List */
+  .activity-list {
+    max-height: 400px;
+    overflow-y: auto;
+  }
+  
+  /* Data Tables */
+  .data-table {
+    min-width: 800px;
+  }
+  
+  .data-table th {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  
+  /* Search and Filter */
+  .search-filter {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+  
+  .search-filter input {
+    flex: 1;
+  }
+  
+  /* Date Filter */
+  .date-filter {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .date-filter label {
+    font-weight: 600;
+  }
+  
+  .date-filter select {
+    width: auto;
+  }
+  
+  /* Admin Charts */
+  .chart {
+    min-height: 300px;
+  }
+  
+  /* Admin Panel Styles */
+  .btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-sm {
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+  
+  .btn-primary {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  .btn-primary:hover {
+    background-color: #45a049;
+  }
+  
+  .btn-secondary {
+    background-color: #2196F3;
+    color: white;
+  }
+  
+  .btn-secondary:hover {
+    background-color: #0b7dda;
+  }
+  
+  .btn-danger {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  .btn-danger:hover {
+    background-color: #da190b;
+  }
+  
+  /* Action buttons container */
+  .action-buttons {
+    display: flex;
+    gap: 8px;
+  }
+  
+  /* Search filter styles */
+  .search-filter {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  
+  .search-filter input {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    flex: 1;
+  }
+  
+  /* Pagination styles */
+  .pagination {
+    display: flex;
+    gap: 8px;
+    margin-top: 20px;
+    justify-content: center;
+  }
+  
+  .pagination-btn {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    background-color: white;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .pagination-btn.active {
+    background-color: #2196F3;
+    color: white;
+    border-color: #2196F3;
+  }
+  
+  .pagination-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  /* Status badge styles */
+  .status-badge {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+  }
+  
+  .status-badge.active {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  .status-badge.inactive {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  /* Mobile menu styles */
+  .hamburger {
+    display: none;
+    cursor: pointer;
+  }
+  
+  .hamburger .line {
+    width: 25px;
+    height: 3px;
+    background-color: #333;
+    margin: 5px;
+    transition: all 0.3s ease;
+  }
+  
+  @media (max-width: 768px) {
+    .hamburger {
+      display: block;
+    }
+    
+    .nav-links {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background-color: white;
+      padding: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .nav-links.active {
+      display: block;
+    }
+    
+    .nav-links ul {
+      flex-direction: column;
+    }
+    
+    .nav-links li {
+      margin: 10px 0;
+    }
+  }
+  
+  /* Tab styles */
+  .admin-tab {
+    display: none;
+  }
+  
+  .admin-tab.active {
+    display: block;
+  }
+  
+  /* Table styles */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .data-table th,
+  .data-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .data-table th {
+    background-color: #f5f5f5;
+    font-weight: bold;
+  }
+  
+  .data-table tr:hover {
+    background-color: #f9f9f9;
+  }
+  

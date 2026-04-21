@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment - HandiCare</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .payment-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .payment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .payment-details {
+            margin-bottom: 20px;
+        }
+        .payment-summary {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+        }
+        .payment-summary p {
+            display: flex;
+            justify-content: space-between;
+            margin: 5px 0;
+        }
+        .pay-now-btn {
+            background: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+        .pay-now-btn:hover {
+            background: #218838;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Payment Details</h1>
+            <a href="/user_dashboard" class="btn btn-secondary">Back to Dashboard</a>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <div id="payment-list"></div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const response = await fetch('/api/payment_data');
+                const data = await response.json();
+                
+                if (!data.success) {
+                    throw new Error(data.error || 'Failed to fetch payment data');
+                }
+
+                const paymentList = document.getElementById('payment-list');
+                
+                if (data.requests.length === 0) {
+                    paymentList.innerHTML = '<div class="payment-card"><p>No completed requests found.</p></div>';
+                    return;
+                }
+
+                data.requests.forEach(request => {
+                    const card = document.createElement('div');
+                    card.className = 'payment-card';
+                    card.innerHTML = `
+                        <div class="payment-header">
+                            <h3>${request.title}</h3>
+                            <span class="status-badge completed">Completed</span>
+                        </div>
+                        <div class="payment-details">
+                            <p><strong>Date:</strong> ${new Date(request.date).toLocaleDateString()}</p>
+                            <p><strong>Time:</strong> ${request.time}</p>
+                            <p><strong>Duration:</strong> ${request.duration} hours</p>
+                            <p><strong>Volunteer:</strong> ${request.volunteer_name}</p>
+                            <p><strong>Location:</strong> ${request.location}</p>
+                        </div>
+                        <div class="payment-summary">
+                            <p><span>Base Amount:</span> <span>₹${request.amount}</span></p>
+                            <p><span>GST (18%):</span> <span>₹${request.gst.toFixed(2)}</span></p>
+                            <p><strong>Total Amount:</strong> <strong>₹${request.total.toFixed(2)}</strong></p>
+                        </div>
+                        <div class="payment-method">
+                            <label for="payment-method-${request.id}">Payment Method:</label>
+                            <select id="payment-method-${request.id}" class="form-control">
+                                <option value="Cash">Cash</option>
+                                <option value="UPI">UPI</option>
+                                <option value="Card">Card</option>
+                                <option value="online">Online</option>
+                            </select>
+                        </div>
+                        <button class="pay-now-btn" onclick="handlePayment(${request.id}, ${request.total}, 'payment-method-${request.id}')">
+                            Pay Now
+                        </button>
+                    `;
+                    paymentList.appendChild(card);
+                });
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('payment-list').innerHTML = `
+                    <div class="payment-card">
+                        <p class="error">Error loading payment data. Please try again later.</p>
+                    </div>
+                `;
+            }
+        });
+
+        async function handlePayment(requestId, amount, methodSelectId) {
+            const method = document.getElementById(methodSelectId).value;
+            try {
+                const response = await fetch('/api/payments', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        request_id: requestId,
+                        amount: amount,
+                        method: method
+                    })
+                });
+
+                const data = await response.json();
+                if (data.success) {
+                    alert('Payment successful!');
+                    window.location.reload();
+                } else {
+                    throw new Error(data.error || 'Payment failed');
+                }
+            } catch (error) {
+                console.error('Payment error:', error);
+                alert('Payment failed: ' + error.message);
+            }
+        }
+    </script>
+</body>
+</html> 

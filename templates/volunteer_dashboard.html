@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volunteer Dashboard - HandiCare</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1><span class="highlight">Handi</span>Care</h1>
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/volunteer_dashboard" class="active">Dashboard</a></li>
+                <li><a href="/feedback">Feedback</a></li>
+                <li><a href="/emergency">Emergency</a></li>
+                <li><a href="/logout" class="logout-btn">Logout</a></li>
+            </ul>
+        </nav>
+        <div class="hamburger">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+    </header>
+
+    <main>
+        <section class="dashboard">
+            <div class="container">
+                <div class="dashboard-header">
+                    <h2>Welcome, <span id="volunteer-name">Sarah</span>!</h2>
+                    <p>Manage your volunteer activities and view your performance.</p>
+                </div>
+                
+                <div class="dashboard-grid">
+                    <div class="dashboard-sidebar">
+                        <div class="user-profile">
+                            <div class="user-avatar">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <div class="user-info">
+                                <h3 id="sidebar-volunteer-name">Sarah Johnson</h3>
+                                <p id="volunteer-email">sarah.johnson@example.com</p>
+                                <div class="volunteer-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                    <span>4.5</span>
+                                </div>
+                            </div>
+                        </div>
+                        <nav class="dashboard-nav">
+                            <ul>
+                                <li><a href="#" class="active" data-tab="available-requests"><i class="fas fa-list"></i> Available Requests</a></li>
+                                <li><a href="#" data-tab="my-assignments"><i class="fas fa-tasks"></i> My Assignments</a></li>
+                                <li><a href="#" data-tab="completed-tasks"><i class="fas fa-check-circle"></i> Completed Tasks</a></li>
+                                <li><a href="#" data-tab="performance"><i class="fas fa-chart-line"></i> Performance</a></li>
+                                <li><a href="#" data-tab="profile"><i class="fas fa-user"></i> Profile Settings</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    
+                    <div class="dashboard-content">
+                        <div class="dashboard-tab active" id="available-requests">
+                            <div class="tab-header">
+                                <h3>Available Help Requests</h3>
+                                <div class="filter-controls">
+                                    <select id="request-type-filter">
+                                        <option value="all">All Types</option>
+                                        <option value="shopping">Grocery Shopping</option>
+                                        <option value="medical">Medical Appointment</option>
+                                        <option value="housework">Housework</option>
+                                        <option value="transportation">Transportation</option>
+                                        <option value="companionship">Companionship</option>
+                                    </select>
+                                    <select id="distance-filter">
+                                        <option value="all">Any Distance</option>
+                                        <option value="5">Within 5 miles</option>
+                                        <option value="10">Within 10 miles</option>
+                                        <option value="20">Within 20 miles</option>
+                                    </select>
+                                    <button class="btn btn-secondary btn-sm" id="filter-btn"><i class="fas fa-filter"></i> Filter</button>
+                                </div>
+                            </div>
+                            
+                            <div class="requests-list">
+                                <div class="request-card">
+                                    <div class="request-header">
+                                        <h4>Grocery Shopping Assistance</h4>
+                                        <span class="distance-badge"><i class="fas fa-map-marker-alt"></i> 2.3 miles</span>
+                                    </div>
+                                    <div class="request-details">
+                                        <p><i class="fas fa-calendar"></i> Date: <span>May 15, 2023</span></p>
+                                        <p><i class="fas fa-clock"></i> Time: <span>10:00 AM - 12:00 PM</span></p>
+                                        <p><i class="fas fa-map-marker-alt"></i> Location: <span>123 Main St, Anytown</span></p>
+                                        <p><i class="fas fa-tag"></i> Type: <span>Shopping</span></p>
+                                    </div>
+                                    <div class="request-description">
+                                        <p>Need help with weekly grocery shopping. I have mobility issues and cannot carry heavy items.</p>
+                                    </div>
+                                    <div class="user-info">
+                                        <h5>Requested by</h5>
+                                        <div class="user-details">
+                                            <div class="user-avatar">
+                                                <i class="fas fa-user-circle"></i>
+                                            </div>
+                                            <div class="user-data">
+                                                <p class="user-name">John Doe</p>
+                                                <p class="user-disability">Mobility Impairment</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="request-actions">
+                                        <button class="btn btn-primary btn-sm"><i class="fas fa-check"></i> Accept Request</button>
+                                        <button class="btn btn-secondary btn-sm"><i class="fas fa-info-circle"></i> More Details</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="request-card">
+                                    <div class="request-header">
+                                        <h4>Doctor's Appointment</h4>
+                                        <span class="distance-badge"><i class="fas fa-map-marker-alt"></i> 4.7 miles</span>
+                                    </div>
+                                    <div class="request-details">
+                                        <p><i class="fas fa-calendar"></i> Date: <span>May 20, 2023</span></p>
+                                        <p><i class="fas fa-clock"></i> Time: <span>2:00 PM - 4:00 PM</span></p>
+                                        <p><i class="fas fa-map-marker-alt"></i> Location: <span>456 Health Ave, Anytown</span></p>
+                                        <p><i class="fas fa-tag"></i> Type: <span>Medical</span></p>
+                                    </div>
+                                    <div class="request-description">
+                                        <p>Need transportation to and from doctor's appointment. I use a wheelchair.</p>
+                                    </div>
+                                    <div class="user-info">
+                                        <h5>Requested by</h5>
+                                        <div class="user-details">
+                                            <div class="user-avatar">
+                                                <i class="fas fa-user-circle"></i>
+                                            </div>
+                                            <div class="user-data">
+                                                <p class="user-name">Robert Smith</p>
+                                                <p class="user-disability">Mobility Impairment</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="request-actions">
+                                        <button class="btn btn-primary btn-sm"><i class="fas fa-check"></i> Accept Request</button>
+                                        <button class="btn btn-secondary btn-sm"><i class="fas fa-info-circle"></i> More Details</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="request-card">
+                                    <div class="request-header">
+                                        <h4>Reading Assistance</h4>
+                                        <span class="distance-badge"><i class="fas fa-map-marker-alt"></i> 1.5 miles</span>
+                                    </div>
+                                    <div class="request-details">
+                                        <p><i class="fas fa-calendar"></i> Date: <span>May 18, 2023</span></p>
+                                        <p><i class="fas fa-clock"></i> Time: <span>3:00 PM - 5:00 PM</span></p>
+                                        <p><i class="fas fa-map-marker-alt"></i> Location: <span>789 Oak St, Anytown</span></p>
+                                        <p><i class="fas fa-tag"></i> Type: <span>Companionship</span></p>
+                                    </div>
+                                    <div class="request-description">
+                                        <p>Need someone to read mail and help with some paperwork. I have visual impairment.</p>
+                                    </div>
+                                    <div class="user-info">
+                                        <h5>Requested by</h5>
+                                        <div class="user-details">
+                                            <div class="user-avatar">
+                                                <i class="fas fa-user-circle"></i>
+                                            </div>
+                                            <div class="user-data">
+                                                <p class="user-name">Emily Johnson</p>
+                                                <p class="user-disability">Visual Impairment</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="request-actions">
+                                        <button class="btn btn-primary btn-sm"><i class="fas fa-check"></i> Accept Request</button>
+                                        <button class="btn btn-secondary btn-sm"><i class="fas fa-info-circle"></i> More Details</button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="pagination">
+                                <button class="pagination-btn" disabled><i class="fas fa-chevron-left"></i></button>
+                                <button class="pagination-btn active">1</button>
+                                <button class="pagination-btn">2</button>
+                                <button class="pagination-btn">3</button>
+                                <button class="pagination-btn"><i class="fas fa-chevron-right"></i></button>
+                            </div>
+                        </div>
+                        
+                        <div class="dashboard-tab" id="my-assignments">
+                            <div class="tab-header">
+                                <h3>My Assignments</h3>
+                            </div>
+                            
+                            <div class="requests-list">
+                                <div class="request-card">
+                                    <div class="request-header">
+                                        <h4>Doctor's Appointment</h4>
+                                        <span class="status-badge accepted">Accepted</span>
+                                    </div>
+                                    <div class="request-details">
+                                        <p><i class="fas fa-calendar"></i> Date: <span>May 20, 2023</span></p>
+                                        <p><i class="fas fa-clock"></i> Time: <span>2:00 PM - 4:00 PM</span></p>
+                                        <p><i class="fas fa-map-marker-alt"></i> Location: <span>456 Health Ave, Anytown</span></p>
+                                        <p><i class="fas fa-tag"></i> Type: <span>Medical</span></p>
+                                    </div>
+                                    <div class="request-description">
+                                        <p>Need transportation to and from doctor's appointment. I use a wheelchair.</p>
+                                    </div>
+                                    <div class="user-info">
+                                        <h5>Requested by</h5>
+                                        <div class="user-details">
+                                            <div class="user-avatar">
+                                                <i class="fas fa-user-circle"></i>
+                                            </div>
+                                            <div class="user-data">
+                                                <p class="user-name">John Doe</p>
+                                                <p class="user-disability">Mobility Impairment</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="request-actions">
+                                        <button class="btn btn-primary btn-sm"><i class="fas fa-phone"></i> Contact</button>
+                                        <button class="btn btn-success btn-sm"><i class="fas fa-check-circle"></i> Mark Complete</button>
+                                        <button class="btn btn-danger btn-sm"><i class="fas fa-times-circle"></i> Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="dashboard-tab" id="completed-tasks">
+                            <div class="tab-header">
+                                <h3>Completed Tasks</h3>
+                            </div>
+                            
+                            <div class="requests-list">
+                                <div class="request-card">
+                                    <div class="request-header">
+                                        <h4>Home Cleaning Help</h4>
+                                        <span class="status-badge completed">Completed</span>
+                                    </div>
+                                    <div class="request-details">
+                                        <p><i class="fas fa-calendar"></i> Date: <span>May 10, 2023</span></p>
+                                        <p><i class="fas fa-clock"></i> Time: <span>1:00 PM - 3:00 PM</span></p>
+                                        <p><i class="fas fa-map-marker-alt"></i> Location: <span>123 Main St, Anytown</span></p>
+                                        <p><i class="fas fa-tag"></i> Type: <span>Housework</span></p>
+                                    </div>
+                                    <div class="request-description">
+                                        <p>Needed help with cleaning my apartment. I have limited mobility in my arms.</p>
+                                    </div>
+                                    <div class="user-info">
+                                        <h5>Requested by</h5>
+                                        <div class="user-details">
+                                            <div class="user-avatar">
+                                                <i class="fas fa-user-circle"></i>
+                                            </div>
+                                            <div class="user-data">
+                                                <p class="user-name">Michael Brown</p>
+                                                <p class="user-disability">Mobility Impairment</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="feedback-received">
+                                        <h5>Feedback Received</h5>
+                                        <div class="feedback-slideshow">
+                                            <div class="feedback-slides">
+                                                <div class="feedback-slide">
+                                                    <div class="feedback-content">
+                                                        <div class="feedback-header">
+                                                            <div class="user-info">
+                                                                <i class="fas fa-user-circle"></i>
+                                                                <h4>Michael Brown</h4>
+                                                            </div>
+                                                            <div class="rating">
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                                <span>5.0</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="feedback-text">
+                                                            <p>"Sarah was extremely helpful and thorough. She was respectful of my space and made sure to ask before moving anything."</p>
+                                                        </div>
+                                                        <div class="feedback-date">
+                                                            <i class="fas fa-calendar"></i> May 10, 2023
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="feedback-slide">
+                                                    <div class="feedback-content">
+                                                        <div class="feedback-header">
+                                                            <div class="user-info">
+                                                                <i class="fas fa-user-circle"></i>
+                                                                <h4>Emily Johnson</h4>
+                                                            </div>
+                                                            <div class="rating">
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="far fa-star"></i>
+                                                                <span>4.0</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="feedback-text">
+                                                            <p>"Sarah was very helpful with my grocery shopping. She got most items on my list but missed a few. Overall a good experience."</p>
+                                                        </div>
+                                                        <div class="feedback-date">
+                                                            <i class="fas fa-calendar"></i> April 28, 2023
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="slideshow-controls">
+                                                <button class="prev-btn"><i class="fas fa-chevron-left"></i></button>
+                                                <div class="slide-dots">
+                                                    <span class="dot active"></span>
+                                                    <span class="dot"></span>
+                                                </div>
+                                                <button class="next-btn"><i class="fas fa-chevron-right"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="pagination">
+                                <button class="pagination-btn" disabled><i class="fas fa-chevron-left"></i></button>
+                                <button class="pagination-btn active">1</button>
+                                <button class="pagination-btn">2</button>
+                                <button class="pagination-btn"><i class="fas fa-chevron-right"></i></button>
+                            </div>
+                        </div>
+                        
+                        <div class="dashboard-tab" id="performance">
+                            <div class="tab-header">
+                                <h3>Performance Statistics</h3>
+                                <div class="date-filter">
+                                    <label for="performance-period">Period:</label>
+                                    <select id="performance-period">
+                                        <option value="month">Last Month</option>
+                                        <option value="3months">Last 3 Months</option>
+                                        <option value="6months">Last 6 Months</option>
+                                        <option value="year">Last Year</option>
+                                        <option value="all">All Time</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="stats-grid">
+                                <div class="stat-card">
+                                    <div class="stat-icon">
+                                        <i class="fas fa-tasks"></i>
+                                    </div>
+                                    <div class="stat-data">
+                                        <h4>Total Tasks</h4>
+                                        <p class="stat-number">24</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="stat-card">
+                                    <div class="stat-icon">
+                                        <i class="fas fa-check-circle"></i>
+                                    </div>
+                                    <div class="stat-data">
+                                        <h4>Completed</h4>
+                                        <p class="stat-number">22</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="stat-card">
+                                    <div class="stat-icon">
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <div class="stat-data">
+                                        <h4>Average Rating</h4>
+                                        <p class="stat-number">4.5</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="stat-card">
+                                    <div class="stat-icon">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                    <div class="stat-data">
+                                        <h4>Hours Volunteered</h4>
+                                        <p class="stat-number">48</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="charts-container">
+                                <div class="chart-card">
+                                    <h4>Tasks by Type</h4>
+                                    <div class="chart" id="tasks-by-type-chart">
+                                        <canvas id="tasks-type-canvas"></canvas>
+                                    </div>
+                                </div>
+                                
+                                <div class="chart-card">
+                                    <h4>Monthly Activity</h4>
+                                    <div class="chart" id="monthly-activity-chart">
+                                        <canvas id="monthly-activity-canvas"></canvas>
+                                    </div>
+                                </div>
+                                
+                                <div class="chart-card">
+                                    <h4>Rating History</h4>
+                                    <div class="chart" id="rating-history-chart">
+                                        <canvas id="rating-history-canvas"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="dashboard-tab" id="profile">
+                            <div class="tab-header">
+                                <h3>Profile Settings</h3>
+                            </div>
+                            
+                            <form id="volunteer-profile-form" class="profile-form">
+                                <div class="form-section">
+                                    <h4>Personal Information</h4>
+                                    <div class="form-grid">
+                                        <div class="form-group">
+                                            <label for="volunteer-profile-name">Full Name</label>
+                                            <input type="text" id="volunteer-profile-name" name="name" value="Sarah Johnson" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="volunteer-profile-email">Email</label>
+                                            <input type="email" id="volunteer-profile-email" name="email" value="sarah.johnson@example.com" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="volunteer-profile-phone">Phone Number</label>
+                                            <input type="tel" id="volunteer-profile-phone" name="phone" value="(555) 987-6543" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="volunteer-profile-address">Address</label>
+                                            <textarea id="volunteer-profile-address" name="address" required>456 Elm St, Anytown, ST 12345</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-section">
+                                    <h4>Skills & Availability</h4>
+                                    <div class="form-grid">
+                                        <div class="form-group">
+                                            <label for="volunteer-profile-skills">Skills</label>
+                                            <select id="volunteer-profile-skills" name="skills" multiple>
+                                                <option value="driving" selected>Driving</option>
+                                                <option value="shopping" selected>Shopping Assistance</option>
+                                                <option value="medical">Medical Assistance</option>
+                                                <option value="companionship" selected>Companionship</option>
+                                                <option value="housework" selected>Housework</option>
+                                                <option value="other">Other</option>
+                                            </select>
+                                            <small>Hold Ctrl (or Cmd) to select multiple skills</small>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="volunteer-profile-availability">Availability</label>
+                                            <select id="volunteer-profile-availability" name="availability" multiple>
+                                                <option value="weekday-morning" selected>Weekday Mornings</option>
+                                                <option value="weekday-afternoon">Weekday Afternoons</option>
+                                                <option value="weekday-evening" selected>Weekday Evenings</option>
+                                                <option value="weekend-morning" selected>Weekend Mornings</option>
+                                                <option value="weekend-afternoon" selected>Weekend Afternoons</option>
+                                                <option value="weekend-evening">Weekend Evenings</option>
+                                            </select>
+                                            <small>Hold Ctrl (or Cmd) to select multiple time slots</small>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="volunteer-profile-radius">Service Radius (miles)</label>
+                                            <input type="number" id="volunteer-profile-radius" name="radius" min="1" max="50" value="10">
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-section">
+                                    <h4>Account Settings</h4>
+                                    <div class="form-grid">
+                                        <div class="form-group">
+                                            <label for="volunteer-profile-current-password">Current Password</label>
+                                            <input type="password" id="volunteer-profile-current-password" name="current-password">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="volunteer-profile-new-password">New Password</label>
+                                            <input type="password" id="volunteer-profile-new-password" name="new-password">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="volunteer-profile-confirm-password">Confirm New Password</label>
+                                            <input type="password" id="volunteer-profile-confirm-password" name="confirm-password">
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-section">
+                                    <h4>Notification Settings</h4>
+                                    <div class="form-group checkbox-group">
+                                        <input type="checkbox" id="volunteer-notify-email" name="notify-email" checked>
+                                        <label for="volunteer-notify-email">Email notifications</label>
+                                    </div>
+                                    <div class="form-group checkbox-group">
+                                        <input type="checkbox" id="volunteer-notify-sms" name="notify-sms" checked>
+                                        <label for="volunteer-notify-sms">SMS notifications</label>
+                                    </div>
+                                    <div class="form-group checkbox-group">
+                                        <input type="checkbox" id="volunteer-notify-new-requests" name="notify-new-requests" checked>
+                                        <label for="volunteer-notify-new-requests">New help requests in my area</label>
+                                    </div>
+                                    <div class="form-group checkbox-group">
+                                        <input type="checkbox" id="volunteer-notify-urgent" name="notify-urgent" checked>
+                                        <label for="volunteer-notify-urgent">Urgent requests only</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-actions">
+                                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                                    <button type="reset" class="btn btn-secondary">Reset</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>HandiCare</h3>
+                    <p>Connecting those in need with those who can help.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="volunteer_dashboard.html">Dashboard</a></li>
+                        <li><a href="feedback.html">Feedback</a></li>
+                        <li><a href="emergency.html">Emergency</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-envelope"></i> info@handicare.org</p>
+                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Follow Us</h3>
+                    <div class="social-icons">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 HandiCare. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Load Chart.js first -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Then load our custom scripts -->
+    <script src="../static/js/dashboard.js"></script>
+    <script src="../static/js/volunteer-charts.js"></script>
+    <script src="../static/js/volunteer.js"></script>
+
+    <style>
+    .feedback-slideshow {
+        position: relative;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .feedback-slides {
+        position: relative;
+        height: 300px;
+        overflow: hidden;
+    }
+
+    .feedback-slide {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+    }
+
+    .feedback-slide.active {
+        opacity: 1;
+    }
+
+    .feedback-content {
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        border-radius: 15px;
+        padding: 25px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .feedback-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .user-info {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .user-info i {
+        font-size: 2.5rem;
+        color: #4a90e2;
+    }
+
+    .user-info h4 {
+        margin: 0;
+        color: #2c3e50;
+        font-size: 1.2rem;
+    }
+
+    .rating {
+        color: #ffd700;
+        font-size: 1.2rem;
+    }
+
+    .rating span {
+        color: #2c3e50;
+        margin-left: 5px;
+    }
+
+    .feedback-text {
+        flex-grow: 1;
+        font-size: 1.1rem;
+        line-height: 1.6;
+        color: #34495e;
+        margin: 20px 0;
+    }
+
+    .feedback-date {
+        color: #7f8c8d;
+        font-size: 0.9rem;
+    }
+
+    .slideshow-controls {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+        gap: 20px;
+    }
+
+    .prev-btn, .next-btn {
+        background: #4a90e2;
+        color: white;
+        border: none;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .prev-btn:hover, .next-btn:hover {
+        background: #357abd;
+    }
+
+    .slide-dots {
+        display: flex;
+        gap: 10px;
+    }
+
+    .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #bdc3c7;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .dot.active {
+        background: #4a90e2;
+    }
+    </style>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const slides = document.querySelectorAll('.feedback-slide');
+        const dots = document.querySelectorAll('.dot');
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
+        let currentSlide = 0;
+
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            currentSlide = (n + slides.length) % slides.length;
+            
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+        }
+
+        prevBtn.addEventListener('click', () => showSlide(currentSlide - 1));
+        nextBtn.addEventListener('click', () => showSlide(currentSlide + 1));
+        
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => showSlide(index));
+        });
+
+        // Auto-advance slides every 5 seconds
+        setInterval(() => showSlide(currentSlide + 1), 5000);
+
+        // Show first slide initially
+        showSlide(0);
+    });
+    </script>
+</body>
+</html>
